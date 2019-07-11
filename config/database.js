@@ -1,5 +1,9 @@
 const mongoose = require('mongoose')
-module.exports = mongoose.connect('mongodb://localhost/db_finance')
+mongoose.Promise = global.Promise
+
+const url = process.env.MONGOLAB_URI ? process.env.MONGOLAB_URI : 'mongodb://localhost/db_finance'
+
+module.exports = mongoose.connect(url, { useMongoClient: true})
 
 //ERROR MESSAGE
 mongoose.Error.messages.general.required = "The atribute '{PATH}' is required."
